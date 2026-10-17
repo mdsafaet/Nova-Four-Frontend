@@ -1,0 +1,1094 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500;600&display=swap");
+
+/* =========================================
+   SECTION
+========================================= */
+
+.story-stack {
+  position: relative;
+
+  padding: 70px 0 90px;
+
+  background: #f4f2ed;
+  color: #101827;
+
+  font-family:
+    "Jost",
+    sans-serif;
+
+  overflow: visible;
+}
+
+.story-stack__container {
+  width:
+    min(
+      1720px,
+      calc(100% - 80px)
+    );
+
+  margin: 0 auto;
+}
+
+/* =========================================
+   SECTION HEADER
+========================================= */
+
+.story-stack__heading {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(280px, 0.5fr);
+
+  align-items: end;
+
+  gap: 48px;
+
+  margin-bottom: 52px;
+}
+
+.story-stack__label {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: #52606d;
+}
+
+.story-stack__label-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #23646c;
+}
+
+.story-stack__heading h2 {
+  max-width: 11ch;
+
+  margin: 0;
+
+  font-family:
+    "Instrument Serif",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      3.4rem,
+      5vw,
+      6rem
+    );
+
+  line-height: 0.92;
+
+  letter-spacing: -0.045em;
+
+  font-weight: 400;
+
+  color: #111827;
+}
+
+.story-stack__heading h2 span {
+  display: block;
+
+  font-style: italic;
+
+  color: #23646c;
+}
+
+.story-stack__heading > p {
+  max-width: 380px;
+
+  margin: 0;
+
+  font-size:
+    clamp(
+      12px,
+      0.95vw,
+      14px
+    );
+
+  line-height: 1.65;
+
+  color: #68717c;
+}
+
+/* =========================================
+   STACK
+========================================= */
+
+.story-stack__cards {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  gap:
+    clamp(
+      24px,
+      4svh,
+      42px
+    );
+}
+
+.story-stack-item {
+  position: sticky;
+
+  top:
+    calc(
+      var(--header-h, 72px)
+      +
+      (
+        var(--story-index) * 15px
+      )
+    );
+
+  min-height: 450px;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.story-card {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 450px;
+
+  padding:
+    clamp(
+      22px,
+      2vw,
+      28px
+    );
+
+  border-radius: 26px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 22px 60px
+    rgba(20, 35, 50, 0.08);
+
+  transform-origin: top center;
+}
+
+/* =========================================
+   THEMES
+========================================= */
+
+.story-card--sand {
+  background: #e8e1d6;
+  color: #18202d;
+}
+
+.story-card--blue {
+  background: #172c68;
+  color: #ffffff;
+}
+
+.story-card--green {
+  background: #315f57;
+  color: #ffffff;
+}
+
+.story-card--mist {
+  background: #dce5e8;
+  color: #172033;
+}
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.story-card__top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap:
+    clamp(
+      14px,
+      1.5vw,
+      20px
+    );
+
+  min-height: 24px;
+
+  margin-bottom:
+    clamp(
+      12px,
+      1.2vw,
+      16px
+    );
+}
+
+.story-card__year-wrap {
+  display: flex;
+  align-items: center;
+
+  gap:
+    clamp(
+      8px,
+      1vw,
+      14px
+    );
+
+  min-width: 0;
+}
+
+.story-card__number {
+  flex-shrink: 0;
+
+  font-size:
+    clamp(
+      8px,
+      0.65vw,
+      9px
+    );
+
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+
+  opacity: 0.55;
+}
+
+.story-card__date {
+  font-size:
+    clamp(
+      8px,
+      0.65vw,
+      9px
+    );
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  opacity: 0.6;
+}
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.story-card__progress {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  width:
+    clamp(
+      130px,
+      12vw,
+      170px
+    );
+
+  flex-shrink: 0;
+
+  font-size: 8px;
+
+  letter-spacing: 0.12em;
+
+  opacity: 0.6;
+}
+
+.story-card__progress-line {
+  position: relative;
+
+  flex: 1;
+
+  height: 1px;
+
+  background: currentColor;
+
+  opacity: 0.3;
+}
+
+.story-card__progress-line span {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  height: 1px;
+
+  background: currentColor;
+
+  opacity: 1;
+}
+
+/* =========================================
+   MAIN CARD LAYOUT
+========================================= */
+
+.story-card__layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.08fr)
+    minmax(0, 0.92fr);
+
+  gap:
+    clamp(
+      20px,
+      2.2vw,
+      30px
+    );
+
+  min-height: 370px;
+
+  align-items: stretch;
+}
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.story-card__content {
+  display: grid;
+
+  grid-template-rows:
+    auto
+    1fr;
+
+  min-width: 0;
+
+  gap:
+    clamp(
+      18px,
+      2.2vw,
+      26px
+    );
+
+  padding:
+    4px
+    clamp(4px, 1vw, 12px)
+    2px
+    2px;
+}
+
+/* =========================================
+   EYEBROW
+========================================= */
+
+.story-card__eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size:
+    clamp(
+      7px,
+      0.6vw,
+      8px
+    );
+
+  font-weight: 500;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.18em;
+
+  opacity: 0.55;
+}
+
+/* =========================================
+   YEAR
+========================================= */
+
+.story-card__year {
+  font-family:
+    "Instrument Serif",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      3.8rem,
+      5.5vw,
+      5.8rem
+    );
+
+  line-height: 0.78;
+
+  letter-spacing: -0.04em;
+
+  opacity: 0.95;
+}
+
+/* =========================================
+   COPY
+========================================= */
+
+.story-card__copy {
+  align-self: end;
+
+  max-width: 590px;
+
+  min-width: 0;
+}
+
+.story-card__copy h3 {
+  max-width: 14ch;
+
+  margin:
+    0
+    0
+    clamp(
+      8px,
+      1vw,
+      12px
+    );
+
+  font-family:
+    "Instrument Serif",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      2rem,
+      2.8vw,
+      3.5rem
+    );
+
+  line-height: 0.98;
+
+  letter-spacing: -0.03em;
+
+  font-weight: 400;
+
+  color: inherit;
+}
+
+/* =========================================
+   PARAGRAPHS
+========================================= */
+
+.story-card__paragraphs {
+  width: 100%;
+
+  max-width: 590px;
+}
+
+.story-card__paragraphs p {
+  margin: 0;
+
+  font-size:
+    clamp(
+      10.5px,
+      0.9vw,
+      12px
+    );
+
+  line-height: 1.55;
+
+  color: inherit;
+
+  opacity: 0.74;
+
+  overflow: visible;
+
+  white-space: normal;
+
+  overflow-wrap: anywhere;
+}
+
+.story-card__paragraphs p + p {
+  margin-top:
+    clamp(
+      6px,
+      0.8vw,
+      10px
+    );
+}
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.story-card__media {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 370px;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  background: #172033;
+}
+
+.story-card__media img {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scale(1.01);
+
+  transition:
+    transform
+    1.2s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    );
+}
+
+.story-card:hover
+.story-card__media img {
+  transform: scale(1.055);
+}
+
+/* =========================================
+   IMAGE OVERLAY
+========================================= */
+
+.story-card__media-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(10, 18, 30, 0.45),
+      transparent 45%
+    );
+}
+
+.story-card__media-caption {
+  position: absolute;
+
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  font-size: 8px;
+  font-weight: 500;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+/* =========================================
+   STACK ORDER
+========================================= */
+
+.story-stack-item:nth-child(1) {
+  z-index: 1;
+}
+
+.story-stack-item:nth-child(2) {
+  z-index: 2;
+}
+
+.story-stack-item:nth-child(3) {
+  z-index: 3;
+}
+
+.story-stack-item:nth-child(4) {
+  z-index: 4;
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1500px) {
+  .story-card {
+    min-height: 460px;
+
+    padding: 30px;
+  }
+
+  .story-stack-item {
+    min-height: 460px;
+  }
+
+  .story-card__layout {
+    min-height: 380px;
+
+    grid-template-columns:
+      1.08fr
+      0.92fr;
+
+    gap: 30px;
+  }
+
+  .story-card__media {
+    min-height: 380px;
+  }
+
+  .story-card__paragraphs p {
+    font-size: 11.5px;
+  }
+}
+
+/* =========================================
+   LAPTOP
+========================================= */
+
+@media (max-width: 1250px) {
+  .story-card {
+    padding: 24px;
+  }
+
+  .story-card__layout {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(320px, 0.9fr);
+
+    gap: 22px;
+  }
+
+  .story-card__content {
+    gap: 18px;
+  }
+
+  .story-card__year {
+    font-size:
+      clamp(
+        3.5rem,
+        5vw,
+        5rem
+      );
+  }
+
+  .story-card__copy h3 {
+    font-size:
+      clamp(
+        2rem,
+        2.6vw,
+        3rem
+      );
+  }
+
+  .story-card__paragraphs p {
+    font-size: 10.5px;
+
+    line-height: 1.5;
+  }
+}
+
+/* =========================================
+   TABLET / SMALL LAPTOP
+========================================= */
+
+@media (max-width: 1050px) {
+  .story-stack__container {
+    width:
+      calc(100% - 40px);
+  }
+
+  .story-stack__heading {
+    gap: 28px;
+  }
+
+  .story-card {
+    min-height: 440px;
+
+    padding: 22px;
+  }
+
+  .story-stack-item {
+    min-height: 440px;
+  }
+
+  .story-card__layout {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(280px, 0.82fr);
+
+    gap: 20px;
+
+    min-height: 360px;
+  }
+
+  .story-card__content {
+    gap: 16px;
+  }
+
+  .story-card__media {
+    min-height: 360px;
+  }
+
+  .story-card__year {
+    font-size: 4rem;
+  }
+
+  .story-card__copy h3 {
+    font-size: 2.35rem;
+
+    margin-bottom: 8px;
+  }
+
+  .story-card__paragraphs p {
+    font-size: 10px;
+
+    line-height: 1.45;
+  }
+
+  .story-card__paragraphs p + p {
+    margin-top: 6px;
+  }
+}
+
+/* =========================================
+   MOBILE / TABLET
+========================================= */
+
+@media (max-width: 760px) {
+  .story-stack {
+    padding:
+      60px
+      0;
+  }
+
+  .story-stack__container {
+    width:
+      calc(100% - 28px);
+  }
+
+  .story-stack__heading {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+
+    margin-bottom: 40px;
+  }
+
+  .story-stack__heading h2 {
+    font-size:
+      clamp(
+        3rem,
+        14vw,
+        4.5rem
+      );
+  }
+
+  .story-stack__heading > p {
+    max-width: 100%;
+
+    font-size: 13px;
+  }
+
+  .story-stack__cards {
+    gap: 22px;
+  }
+
+  .story-stack-item {
+    position: relative;
+
+    top: auto;
+
+    min-height: auto;
+  }
+
+  .story-card {
+    min-height: auto;
+
+    padding: 20px;
+
+    border-radius: 20px;
+  }
+
+  .story-card__top {
+    margin-bottom: 18px;
+  }
+
+  .story-card__progress {
+    display: none;
+  }
+
+  .story-card__layout {
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: auto;
+
+    gap: 22px;
+  }
+
+  .story-card__content {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+    padding: 0;
+  }
+
+  .story-card__year {
+    font-size:
+      clamp(
+        3.6rem,
+        16vw,
+        4.4rem
+      );
+  }
+
+  .story-card__copy {
+    align-self: auto;
+
+    max-width: none;
+  }
+
+  .story-card__copy h3 {
+    max-width: none;
+
+    font-size:
+      clamp(
+        2.2rem,
+        11vw,
+        3.2rem
+      );
+
+    line-height: 1;
+  }
+
+  .story-card__paragraphs {
+    max-width: none;
+  }
+
+  .story-card__paragraphs p {
+    font-size:
+      clamp(
+        11.5px,
+        3.2vw,
+        13px
+      );
+
+    line-height: 1.6;
+  }
+
+  .story-card__paragraphs p + p {
+    margin-top: 10px;
+  }
+
+  .story-card__media {
+    height: 280px;
+
+    min-height: 280px;
+
+    border-radius: 16px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .story-stack {
+    padding:
+      50px
+      0;
+  }
+
+  .story-stack__container {
+    width:
+      calc(100% - 22px);
+  }
+
+  .story-stack__heading {
+    margin-bottom: 32px;
+  }
+
+  .story-stack__heading h2 {
+    font-size:
+      clamp(
+        2.7rem,
+        13vw,
+        3.8rem
+      );
+  }
+
+  .story-card {
+    padding: 18px;
+
+    border-radius: 18px;
+  }
+
+  .story-card__top {
+    gap: 10px;
+  }
+
+  .story-card__year-wrap {
+    gap: 8px;
+  }
+
+  .story-card__date {
+    white-space: normal;
+  }
+
+  .story-card__content {
+    gap: 20px;
+  }
+
+  .story-card__year {
+    font-size: 3.8rem;
+  }
+
+  .story-card__copy h3 {
+    font-size: 2.6rem;
+  }
+
+  .story-card__paragraphs p {
+    font-size: 11.5px;
+
+    line-height: 1.55;
+  }
+
+  .story-card__media {
+    height: 240px;
+
+    min-height: 240px;
+
+    border-radius: 14px;
+  }
+
+  .story-card__media-caption {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+
+    font-size: 7px;
+  }
+}
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+  .story-stack__container {
+    width:
+      calc(100% - 18px);
+  }
+
+  .story-card {
+    padding: 16px;
+  }
+
+  .story-card__year {
+    font-size: 3.4rem;
+  }
+
+  .story-card__copy h3 {
+    font-size: 2.3rem;
+  }
+
+  .story-card__paragraphs p {
+    font-size: 11px;
+  }
+
+  .story-card__media {
+    height: 220px;
+
+    min-height: 220px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .story-card__media img {
+    transition: none;
+  }
+
+  .story-card:hover
+  .story-card__media img {
+    transform: scale(1.01);
+  }
+}
+/* =========================================
+   INTEGRATION (wins over global .nvx-site heading rules)
+========================================= */
+
+.story-stack {
+  --header-h: 94px; /* sticky header height + gap */
+}
+
+@media (min-width: 1100px) {
+  .story-stack {
+    --header-h: 106px;
+  }
+}
+
+.nvx-site .story-stack__heading h2 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(3.4rem, 5vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  color: #111827;
+  text-wrap: initial;
+}
+
+.nvx-site .story-stack__heading h2 span {
+  color: #23646c;
+}
+
+.nvx-site .story-card__copy h3 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 2.8vw, 3.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: inherit;
+}
+
+.nvx-site .story-stack__heading > p,
+.nvx-site .story-card__paragraphs p {
+  line-height: inherit;
+}

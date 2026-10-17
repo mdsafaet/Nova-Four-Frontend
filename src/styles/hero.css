@@ -1,0 +1,87 @@
+/* Uses the Jost font already imported by index.css. */
+.nvh-hero { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; min-height: 640px; padding: 64px 0 0; background: #0a1126; color: #fff; }
+.nvh-media { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.nvh-background { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.nvh-video { z-index: 1; }
+.nvh-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(90deg,rgba(8,17,30,.88),rgba(8,17,30,.65)); }
+.nvh-content { position: relative; margin-block: auto; padding-bottom: 54px; }
+.nvx-site .nvh-eyebrow { margin: 0 0 24px; color: #cbe5df; font-size: 11px; line-height: 1.7; letter-spacing: .17em; text-transform: uppercase; }
+.nvx-site .nvh-title { max-width: 920px; margin: 0 0 28px; font-family: var(--font-display,'Jost',sans-serif); font-size: clamp(42px,5.7vw,82px); line-height: 1.07; font-weight: 600; letter-spacing: -.05em; color: #fff; text-wrap: initial; }
+.nvh-heading-stack { display: grid; }
+.nvh-heading-spacer, .nvh-heading-animated { grid-area: 1 / 1; }
+.nvh-heading-spacer { visibility: hidden; }
+.nvx-site .nvh-description { max-width: 670px; margin: 0 0 32px; color: #eef1f5; font-size: 15px; line-height: 1.85; }
+.nvh-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.nvh-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 15px 25px; border: 1px solid #23646c; border-radius: 100px; background: #23646c; color: #fff; font-family: var(--font-body,'Jost',sans-serif); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: background .2s,border-color .2s; }
+.nvx-site .nvh-button:hover { background: #184b52; border-color: #184b52; color: #fff; }
+.nvh-button-outline { background: transparent; border-color: #cbe5df; }
+.nvx-site .nvh-button-outline:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+.nvh-motion-toggle { display: block; min-height: 44px; margin-top: 24px; padding: 8px 0; border: 0; background: transparent; color: #fff; font: inherit; font-size: 12px; text-decoration: underline; text-underline-offset: 5px; cursor: pointer; }
+.nvh-hero :focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
+.nvh-market-strip { position: relative; background: transparent; color: #fff; border-top: 1px solid rgba(255,255,255,.15); }
+.nvh-market-grid { display: grid; grid-template-columns: minmax(0,1fr); margin: 0; padding: 0; list-style: none; }
+.nvh-market-grid > li { min-width: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+.nvh-market-grid > li:last-child { border-bottom: 0; }
+.nvh-market-link { display: flex; justify-content: space-between; align-items: center; gap: 18px; min-height: 100px; padding: 24px 8px; color: #fff; text-decoration: none; }
+.nvx-site .nvh-market-link:hover { color: #fff; background: rgba(255,255,255,.05); }
+.nvh-market-link:focus-visible { outline: 3px solid #cbe5df; outline-offset: -4px; }
+.nvh-market-identity { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.nvh-flag { display: inline-block; flex-shrink: 0; background: transparent; border: 0; overflow: visible; animation: nvhFlagFloat 3.2s ease-in-out infinite; filter: drop-shadow(0 6px 8px rgba(0,0,0,.35)); will-change: transform; }
+.nvh-market-link:hover .nvh-flag { animation-duration: 1.6s; }
+@keyframes nvhFlagFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(-3deg); }
+  50% { transform: translateY(-9px) rotate(0deg); }
+  75% { transform: translateY(-4px) rotate(3deg); }
+}
+.nvh-market-name { display: block; color: #fff; font-size: 16px; font-weight: 600; line-height: 1.4; }
+.nvh-market-city { display: block; margin-top: 4px; color: #c1cad8; font-size: 12px; line-height: 1.5; }
+.nvh-status { display: inline-flex; align-items: center; gap: 7px; flex-shrink: 0; color: #d8e9e3; font-size: 11px; }
+.nvh-status-dot { width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; background: #9dcbb7; }
+#global-presence { scroll-margin-top: 110px; }
+@media (min-width:768px) {
+  .nvh-hero { min-height: 650px; padding-top: 74px; }
+  .nvh-market-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .nvh-market-grid > li { border-bottom: 1px solid rgba(255,255,255,.12); }
+  .nvh-market-grid > li:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.12); }
+  .nvh-market-grid > li:nth-last-child(-n+2) { border-bottom: 0; }
+  .nvh-market-link { padding-inline: 22px; }
+}
+@media (min-width:1100px) {
+  .nvh-hero { min-height: 690px; }
+  .nvh-market-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
+  .nvh-market-grid > li { border-bottom: 0; border-right: 1px solid rgba(255,255,255,.12); }
+  .nvh-market-grid > li:last-child { border-right: 0; }
+  .nvh-market-link { padding-inline: 18px; gap: 12px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .nvh-hero *, .nvh-market-strip * { animation: none !important; transition: none !important; }
+}
+/* Market strip readability */
+.nvh-market-link {
+  min-height: 104px;
+  padding: 22px 18px;
+  gap: 16px;
+}
+.nvh-market-identity { gap: 12px; }
+.nvh-market-name { font-size: 16px; line-height: 1.4; }
+.nvh-market-city { margin-top: 4px; color: #d5dce5; font-size: 14px; }
+.nvh-status { color: #e0e9e5; font-size: 12px; }
+.nvh-flag {
+  display: block;
+  width: 40px;
+  height: 28px;
+  overflow: hidden;
+  border-radius: 4px;
+  filter: none;
+}
+.nvh-flag img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .nvh-market-link { flex-wrap: wrap; align-content: center; row-gap: 10px; }
+  .nvh-status { margin-left: 52px; }
+}

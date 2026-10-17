@@ -1,0 +1,16 @@
+.nvx-site[data-country="bangladesh"] { --gold:#175747; --gold-soft:#c4e4d3; --brand-blue:#175747; --country-paper:#f5f2e8; --country-dark:#102c25; --country-end:#1b3b32; }
+.nvx-site[data-country="dubai"] { --gold:#82552b; --gold-soft:#f0d6ad; --brand-blue:#684425; --country-paper:#f6f0e6; --country-dark:#241e18; --country-end:#382c21; }
+.nvx-site[data-country="usa"] { --gold:#214b80; --gold-soft:#cbdcf7; --brand-blue:#214b80; --country-paper:#edf2f8; --country-dark:#112239; --country-end:#203952; }
+.nvx-site[data-country="uk"] { --gold:#703646; --gold-soft:#efd2dc; --brand-blue:#703646; --country-paper:#f6f1eb; --country-dark:#2c1b24; --country-end:#432b36; }
+.nvx-site[data-country] .nvx-light { background:linear-gradient(125deg,var(--country-paper),#fff); }
+.nvx-site[data-country] .nvx-dark { background:linear-gradient(120deg,var(--country-dark),var(--country-end)); }
+.nvx-site[data-country] .nvx-footer { background:#242629; }
+.nvx-site[data-country] .nvx-gradient-text { background-image:linear-gradient(110deg,var(--gold),var(--brand-blue)); }
+.nvx-site[data-country] .nvx-dark .nvx-gradient-text { background-image:linear-gradient(110deg,#fff,var(--gold-soft)); }
+.nvx-site[data-country] .nvh-market-strip { background:var(--country-dark); }
+.nvx-site[data-country] .nvh-flag { animation:none; }
+.nvx-site[data-country] .nova-contact-section { background:var(--country-dark); }
+.nvx-site[data-country] .nova-one-section { --nova-one-accent:var(--gold); --nova-one-soft:var(--gold-soft); background:linear-gradient(145deg,var(--country-dark),var(--country-end)); }
+.nvx-site[data-country] :focus-visible { outline:3px solid var(--gold); outline-offset:5px; }
+.nvx-site[data-country] .nvx-dark :focus-visible,
+.nvx-site[data-country] .nvh-market-strip :focus-visible { outline-color:var(--gold-soft); }
