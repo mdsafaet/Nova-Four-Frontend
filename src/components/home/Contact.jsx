@@ -22,7 +22,7 @@ const offices = [
     suffix: "HQ",
     hours: "",
     address: [
-      "Al Tallah 2 -  - ",
+      "Al Tallah 2",
       "Ajman",
       "United Arab Emirates",
     ],
