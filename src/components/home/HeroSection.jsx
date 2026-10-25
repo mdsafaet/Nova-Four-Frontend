@@ -23,7 +23,7 @@ export default function HeroSection() {
           </div>
           <figure className="nvc-image">
             <img src={home.heroImage} alt={home.heroAlt} fetchPriority="high" />
-            <figcaption>Illustrative architecture · {market.name}</figcaption>
+            {/* <figcaption>Illustrative architecture · {market.name}</figcaption> */}
           </figure>
         </div>
       </section>
