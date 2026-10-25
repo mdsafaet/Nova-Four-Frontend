@@ -16,5 +16,13 @@ export default function MainLayouts() {
       preventScroll: true
     });
   }, [pathname]);
-  return <div className="nvx-site" data-country={market.id}><a className="skip-link" href="#main">Skip to content</a><Header key={pathname} /><Seo /><main id="main" tabIndex={-1}><Outlet key={pathname.split('/')[1]} /></main><Footer /></div>;
+  return <div className="nvx-site" data-country={market.id}>
+    <a className="skip-link" href="#main">Skip to content</a>
+    <Header key={pathname} />
+    <Seo />
+    <main id="main" tabIndex={-1}>
+      <Outlet key={pathname.split('/')[1]} />
+      </main>
+      <Footer />
+      </div>;
 }

@@ -26,6 +26,24 @@
 [data-country="dubai"] .nvc-note { color:#ece3d8; }
 [data-country="dubai"] .nvc-secondary { color:#fff; border-color:#d6bf9f; }
 [data-country="dubai"] .nvc-hero :focus-visible { outline-color:var(--gold-soft); }
+
+[data-country="bangladesh"] .nvc-hero--video { background:#0a1126; color:#fff; }
+.nvc-hero-background { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.nvc-hero-background img,
+.nvc-hero-background video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.nvc-hero-background video { z-index:1; }
+[data-country="bangladesh"] .nvc-hero--video .nvc-hero-inner { position:relative; z-index:1; min-height:700px; grid-template-columns:minmax(0,760px); align-content:center; }
+[data-country="bangladesh"] .nvc-hero--video .nvc-copy h1 { color:#fff; }
+[data-country="bangladesh"] .nvc-hero--video .nvc-copy h1 span,
+[data-country="bangladesh"] .nvc-hero--video .nvc-label { color:var(--gold-soft); }
+[data-country="bangladesh"] .nvc-hero--video .nvc-intro,
+[data-country="bangladesh"] .nvc-hero--video .nvc-note { color:#f0f3f2; }
+[data-country="bangladesh"] .nvc-hero--video .nvc-secondary { color:#fff; border-color:rgba(255,255,255,.8); }
+
+.nvc-hero--video { display:flex; flex-direction:column; }
+.nvc-hero--video .nvc-hero-inner { flex:1; }
+.nvx-site[data-country] .nvc-hero--video .nvh-market-strip { position:relative; z-index:2; background:transparent; }
+
 @media(min-width:768px) {
  .nvc-hero-inner { grid-template-columns:1fr 1fr; gap:40px; padding-block:64px; }
  .nvc-image { height:490px; }
@@ -37,10 +55,18 @@
  [data-country="dubai"] .nvc-image figcaption { z-index:1; left:auto; }
  [data-country="dubai"] .nvc-copy { grid-column:1 / -1; max-width:730px; }
 }
+
 @media(min-width:1100px) {
  .nvc-hero-inner { gap:72px; padding-block:72px; }
  .nvc-image { height:540px; }
  [data-country="usa"] .nvc-hero-inner { grid-template-columns:.9fr 1.1fr; }
  [data-country="bangladesh"] .nvc-hero-inner { grid-template-columns:1.1fr .9fr; }
 }
-@media(prefers-reduced-motion:reduce) { .nvc-hero *, .nvc-hero *::before, .nvc-hero *::after { animation:none!important; transition:none!important; } }
+
+@media(max-width:767px) {
+ [data-country="bangladesh"] .nvc-hero--video .nvc-hero-inner { min-height:650px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+ .nvc-hero *, .nvc-hero *::before, .nvc-hero *::after { animation:none!important; transition:none!important; }
+}
