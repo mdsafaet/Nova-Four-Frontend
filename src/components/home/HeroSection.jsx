@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { LuArrowUpRight } from 'react-icons/lu';
 import { useCountry } from '../../context/country';
+import { getData } from '../../api/api';
 import MarketStrip from './MarketStrip';
 import '../../styles/country-hero.css';
 
@@ -10,66 +9,70 @@ export default function HeroSection() {
   const market = useCountry();
   const home = market.home;
   const reduceMotion = useReducedMotion();
-  const [videoFailed, setVideoFailed] = useState(false);
   const isBangladesh = market.id === 'bangladesh';
+
+  const [cmsHero, setCmsHero] = useState(null);
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  useEffect(() => {
+    setCmsHero(null);
+    setVideoFailed(false);
+
+    if (!isBangladesh) return;
+
+    const controller = new AbortController();
+
+    getData('/bangladesh/hero', {}, { signal: controller.signal })
+      .then((response) => {
+        if (!controller.signal.aborted) {
+          setCmsHero(response?.data ?? null);
+        }
+      })
+      .catch((error) => {
+        if (!controller.signal.aborted) {
+          console.error('Could not load Bangladesh hero:', error);
+        }
+      });
+
+    return () => controller.abort();
+  }, [isBangladesh]);
+
+  const backgroundImage = cmsHero?.images?.[0] ?? null;
+  const videoUrl = cmsHero?.video ?? null;
 
   return (
     <>
       <section
         className={`nvc-hero${isBangladesh ? ' nvc-hero--video' : ''}`}
-        aria-labelledby="nvc-title"
+        aria-label={`${market.name} homepage hero`}
       >
         {isBangladesh && (
           <div className="nvc-hero-background" aria-hidden="true">
-            <img src={home.heroImage} alt="" fetchPriority="high" />
+            {backgroundImage && (reduceMotion || videoFailed || !videoUrl) && (
+              <img
+                src={backgroundImage}
+                alt=""
+                fetchPriority="high"
+              />
+            )}
 
-            {!reduceMotion && !videoFailed && home.heroVideo && (
+            {!reduceMotion && !videoFailed && videoUrl && (
               <video
+                key={videoUrl}
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="metadata"
-                poster={home.heroImage}
                 onError={() => setVideoFailed(true)}
               >
-                <source src={home.heroVideo} type="video/mp4" />
+                <source src={videoUrl} type="video/mp4" />
               </video>
             )}
           </div>
         )}
 
         <div className="nvc-hero-inner nvx-shell">
-          {/* <div className="nvc-copy">
-            <p className="nvc-label">{home.heroLabel}</p>
-
-            <h1 id="nvc-title">
-              {home.headline}
-              <span>{home.heroAccent}</span>
-            </h1>
-
-            <p className="nvc-intro">{home.intro}</p>
-
-            <div className="nvc-actions">
-              <Link
-                className="nvc-primary"
-                to={`/${market.id}/portfolio`}
-              >
-                {home.heroCta}
-                <LuArrowUpRight aria-hidden="true" />
-              </Link>
-
-              <Link
-                className="nvc-secondary"
-                to={`/${market.id}/contact`}
-              >
-                Speak with our team
-              </Link>
-            </div>
-
-            <p className="nvc-note">{home.heroNote}</p>
-          </div> */}
-
           {!isBangladesh && (
             <figure className="nvc-image">
               <img

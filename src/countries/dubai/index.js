@@ -1,30 +1,31 @@
 import home from './data/home';
 import projects from './data/projects';
 import contact from './data/contact';
+
 export default {
-  id: "dubai",
-  name: "Dubai",
-  currency: "AED",
-  locale: "en-AE",
+  id: 'dubai',
+  name: 'دبي',
+  currency: 'AED',
+  locale: 'ar-AE',
   home,
   projects,
   contact,
   seo: {
-    "home": {
-      "title": "Real estate in Dubai",
-      "description": "Explore residential and commercial possibilities in Dubai, United Arab Emirates. Illustrative preview; verified company and property details pending."
+    home: {
+      title: 'العقارات في دبي',
+      description: 'استكشف الفرص السكنية والتجارية في دبي، الإمارات العربية المتحدة. هذا عرض توضيحي، وتفاصيل الشركة والعقارات بانتظار التحقق.',
     },
-    "about": {
-      "title": "About in Dubai",
-      "description": "Explore residential and commercial possibilities in Dubai, United Arab Emirates. Illustrative preview; verified company and property details pending."
+    about: {
+      title: 'من نحن في دبي',
+      description: 'استكشف الفرص السكنية والتجارية في دبي، الإمارات العربية المتحدة. هذا عرض توضيحي، وتفاصيل الشركة والعقارات بانتظار التحقق.',
     },
-    "portfolio": {
-      "title": "Property collection in Dubai",
-      "description": "Explore residential and commercial possibilities in Dubai, United Arab Emirates. Illustrative preview; verified company and property details pending."
+    portfolio: {
+      title: 'مجموعة العقارات في دبي',
+      description: 'استكشف الفرص السكنية والتجارية في دبي، الإمارات العربية المتحدة. هذا عرض توضيحي، وتفاصيل الشركة والعقارات بانتظار التحقق.',
     },
-    "contact": {
-      "title": "Contact in Dubai",
-      "description": "Explore residential and commercial possibilities in Dubai, United Arab Emirates. Illustrative preview; verified company and property details pending."
-    }
-  }
+    contact: {
+      title: 'تواصل معنا في دبي',
+      description: 'استكشف الفرص السكنية والتجارية في دبي، الإمارات العربية المتحدة. هذا عرض توضيحي، وتفاصيل الشركة والعقارات بانتظار التحقق.',
+    },
+  },
 };

@@ -1,40 +1,53 @@
-export default [{
-  "slug": "dubai-sample-1",
-  "title": "The garden residence — sample",
-  "type": "Residential",
-  "location": "Dubai, UAE · sample location",
-  "description": "An illustrative residential project for the Dubai collection. Replace this example with approved project information, precise location, specifications, availability and licensed property photography. No sale or rental offer is represented.",
-  "images": [{
-    "src": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1800&q=85",
-    "alt": "Illustrative architecture — not an actual listed property"
-  }, {
-    "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
-    "alt": "Additional visual reference — project photography pending"
-  }]
-}, {
-  "slug": "dubai-sample-2",
-  "title": "The light-filled apartment — sample",
-  "type": "Residential",
-  "location": "Dubai, UAE · sample location",
-  "description": "An illustrative residential project for the Dubai collection. Replace this example with approved project information, precise location, specifications, availability and licensed property photography. No sale or rental offer is represented.",
-  "images": [{
-    "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
-    "alt": "Illustrative architecture — not an actual listed property"
-  }, {
-    "src": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1800&q=85",
-    "alt": "Additional visual reference — project photography pending"
-  }]
-}, {
-  "slug": "dubai-sample-3",
-  "title": "The contemporary workspace — sample",
-  "type": "Commercial",
-  "location": "Dubai, UAE · sample location",
-  "description": "An illustrative commercial project for the Dubai collection. Replace this example with approved project information, precise location, specifications, availability and licensed property photography. No sale or rental offer is represented.",
-  "images": [{
-    "src": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1800&q=85",
-    "alt": "Illustrative architecture — not an actual listed property"
-  }, {
-    "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
-    "alt": "Additional visual reference — project photography pending"
-  }]
-}];
+export default [
+  {
+    slug: 'dubai-sample-1',
+    title: 'الإقامة وسط الحدائق — نموذج توضيحي',
+    type: 'سكني',
+    location: 'دبي، الإمارات العربية المتحدة · موقع توضيحي',
+    description: 'مشروع سكني توضيحي لمجموعة دبي. استبدل هذا المثال بمعلومات مشروع معتمدة وموقع دقيق ومواصفات وتوافر وصور عقارية مرخّصة. لا يمثّل هذا المحتوى عرضاً للبيع أو الإيجار.',
+    images: [
+      {
+        src: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1800&q=85',
+        alt: 'تصميم معماري توضيحي — ليس عقاراً معروضاً فعلياً',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85',
+        alt: 'صورة مرجعية إضافية — صور المشروع بانتظار الإضافة',
+      },
+    ],
+  },
+  {
+    slug: 'dubai-sample-2',
+    title: 'الشقة المضيئة — نموذج توضيحي',
+    type: 'سكني',
+    location: 'دبي، الإمارات العربية المتحدة · موقع توضيحي',
+    description: 'مشروع سكني توضيحي لمجموعة دبي. استبدل هذا المثال بمعلومات مشروع معتمدة وموقع دقيق ومواصفات وتوافر وصور عقارية مرخّصة. لا يمثّل هذا المحتوى عرضاً للبيع أو الإيجار.',
+    images: [
+      {
+        src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85',
+        alt: 'تصميم معماري توضيحي — ليس عقاراً معروضاً فعلياً',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1800&q=85',
+        alt: 'صورة مرجعية إضافية — صور المشروع بانتظار الإضافة',
+      },
+    ],
+  },
+  {
+    slug: 'dubai-sample-3',
+    title: 'مساحة العمل العصرية — نموذج توضيحي',
+    type: 'تجاري',
+    location: 'دبي، الإمارات العربية المتحدة · موقع توضيحي',
+    description: 'مشروع تجاري توضيحي لمجموعة دبي. استبدل هذا المثال بمعلومات مشروع معتمدة وموقع دقيق ومواصفات وتوافر وصور عقارية مرخّصة. لا يمثّل هذا المحتوى عرضاً للبيع أو الإيجار.',
+    images: [
+      {
+        src: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1800&q=85',
+        alt: 'تصميم معماري توضيحي — ليس عقاراً معروضاً فعلياً',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85',
+        alt: 'صورة مرجعية إضافية — صور المشروع بانتظار الإضافة',
+      },
+    ],
+  },
+];

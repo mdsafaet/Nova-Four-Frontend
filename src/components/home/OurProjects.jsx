@@ -1,25 +1,16 @@
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Keyboard, A11y } from "swiper/modules";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Keyboard, A11y } from 'swiper/modules';
+import { ArrowUpRight, MapPin } from 'lucide-react';
 
-import "swiper/css";
+import 'swiper/css';
 
-import { useCountry } from "../../context/country";
-import { Reveal } from "../common/Reveal";
+import { useCountry } from '../../context/country';
+import { Reveal } from '../common/Reveal';
 
 export default function OurProjects() {
   const market = useCountry();
   const projects = market.projects || [];
-
-  // Swiper loop needs more slides than slidesPerView, so repeat short lists
-  const slides =
-    projects.length > 0 && projects.length < 8
-      ? Array.from(
-          { length: Math.ceil(8 / projects.length) * projects.length },
-          (_, i) => projects[i % projects.length]
-        )
-      : projects;
 
   return (
     <section
@@ -50,28 +41,42 @@ export default function OurProjects() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.15}>
-          <p className="nvx-disclosure">
-            Sample listings for design preview. Availability, specifications
-            and prices are not confirmed.
-          </p>
-        </Reveal>
+        {market.id !== 'bangladesh' && (
+          <Reveal delay={0.15}>
+            <p className="nvx-disclosure">
+              Sample listings for design preview. Availability, specifications
+              and prices are not confirmed.
+            </p>
+          </Reveal>
+        )}
+
+        {market.projectsLoading && (
+          <p role="status">Loading projects…</p>
+        )}
+
+        {market.projectsError && (
+          <p role="alert">Projects could not be loaded. Please try again.</p>
+        )}
       </div>
 
-      {slides.length > 0 && (
+      {!market.projectsLoading && !market.projectsError && projects.length > 0 && (
         <div className="nvx-portfolio-carousel">
           <Swiper
             modules={[Autoplay, Keyboard, A11y]}
             className="nvx-project-swiper"
-            loop
-            grabCursor
+            loop={projects.length > 4}
+            grabCursor={projects.length > 1}
             keyboard={{ enabled: true }}
             speed={900}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
+            autoplay={
+              projects.length > 1
+                ? {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                  }
+                : false
+            }
             slidesPerView={1.08}
             spaceBetween={16}
             breakpoints={{
@@ -82,11 +87,11 @@ export default function OurProjects() {
               1500: { slidesPerView: 4, spaceBetween: 28 },
             }}
           >
-            {slides.map((project, index) => {
+            {projects.map((project) => {
               const image = project.images?.[0];
 
               return (
-                <SwiperSlide key={`${project.slug}-${index}`}>
+                <SwiperSlide key={project.slug}>
                   <article className="nvx-property-card nvx-glass nvx-carousel-card">
                     <Link
                       className="nvx-property-card-link"
@@ -100,9 +105,12 @@ export default function OurProjects() {
                             loading="lazy"
                           />
                         )}
-                        <span className="nvx-image-label">
-                          Illustrative project
-                        </span>
+
+                        {market.id !== 'bangladesh' && (
+                          <span className="nvx-image-label">
+                            Illustrative project
+                          </span>
+                        )}
                       </div>
 
                       <div className="nvx-property-content">
@@ -111,6 +119,7 @@ export default function OurProjects() {
                             <MapPin size={14} aria-hidden="true" />
                             {project.location}
                           </span>
+
                           {project.type && <span>{project.type}</span>}
                         </div>
 
@@ -119,7 +128,9 @@ export default function OurProjects() {
                           <ArrowUpRight size={21} aria-hidden="true" />
                         </h3>
 
-                        <p>Details awaiting confirmation</p>
+                        {market.id !== 'bangladesh' && (
+                          <p>Details awaiting confirmation</p>
+                        )}
                       </div>
                     </Link>
                   </article>

@@ -1,7 +1,7 @@
 export default {
-  "heading": "Dubai enquiries",
-  "intro": "Prepare your enquiry for the Dubai market. Local contact details will appear here once approved.",
-  "office": "Dubai office address to be confirmed",
-  "email": null,
-  "phone": null
+  heading: 'استفسارات دبي',
+  intro: 'جهّز استفسارك بشأن سوق دبي. ستظهر بيانات التواصل المحلية هنا بعد اعتمادها.',
+  office: 'عنوان مكتب دبي بانتظار التأكيد',
+  email: null,
+  phone: null,
 };
