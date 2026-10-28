@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
-
 import {
   LuArrowUpRight,
   LuClock3,
@@ -8,48 +8,43 @@ import {
   LuMapPin,
   LuPhone,
 } from "react-icons/lu";
-
+import { getData } from "../../api/api";
 import { Reveal } from "../company-profile/Float";
-
 import "../../styles/corporate-offices.css";
 
 const offices = [
   {
     number: "01",
     code: "AE",
+    cmsKey: "dubai",
     city: "Dubai",
     label: "Head Office",
     suffix: "HQ",
     hours: "",
-    address: [
-      "Al Tallah 2",
-      "Ajman",
-      "United Arab Emirates",
-    ],
-    phone: "+971 6538 8233",
+    address: [],
+    phone: "",
     email: "",
-    website: "https://novadevelopmentglobal.com",
+    website: "",
+    locationUrl: "",
   },
   {
     number: "02",
     code: "BD",
+    cmsKey: "bangladesh",
     city: "Dhaka",
     label: "Bangladesh Office",
     suffix: "",
     hours: "",
-    address: [
-      "Rupayan Shopping Square, 10th Floor, Unit-A & B",
-      "Plot No. C-2, Block-G, Sayem Sobhan Anvir Road",
-      "Bashundhara Residential Area, Dhaka-1229",
-      "Bangladesh",
-    ],
-    phone: "+09606 707 707",
+    address: [],
+    phone: "",
     email: "",
-    website: "https://novadevelopmentglobal.com",
+    website: "",
+    locationUrl: "",
   },
   {
     number: "03",
     code: "US",
+    cmsKey: "usa",
     city: "New York",
     label: "Americas Office",
     suffix: "",
@@ -58,10 +53,12 @@ const offices = [
     phone: "",
     email: "",
     website: "",
+    locationUrl: "",
   },
   {
     number: "04",
     code: "GB",
+    cmsKey: "uk",
     city: "London",
     label: "UK Office",
     suffix: "",
@@ -74,35 +71,26 @@ const offices = [
     phone: "+020 3299 6900",
     email: "",
     website: "https://novadevelopmentglobal.com",
+    locationUrl: "",
   },
 ];
 
-/* =========================================================
-   HELPERS
-========================================================= */
+function getPhoneHref(phone) {
+  return phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "";
+}
 
-const getPhoneHref = (phone) =>
-  phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "";
-
-const getDirections = (address) => {
+function getDirections(address) {
   const clean = (address || []).filter(Boolean).join(", ");
 
   return clean
-    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        clean
-      )}`
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(clean)}`
     : "";
-};
-
-/* =========================================================
-   OFFICE ROW
-========================================================= */
+}
 
 function OfficeRow({ office, index }) {
   const lines = (office.address || []).filter((line) => line?.trim());
-  const directions = getDirections(lines);
+  const directions = office.locationUrl || getDirections(lines);
   const phoneHref = getPhoneHref(office.phone);
-
   const hasContact = office.phone || office.email || office.hours;
   const hasActions = directions || office.website;
   const isHq = index === 0;
@@ -142,9 +130,13 @@ function OfficeRow({ office, index }) {
             {lines.length > 0 ? (
               <>
                 <LuMapPin aria-hidden="true" />
+
                 <span>
-                  {lines.map((line, i) => (
-                    <span key={`${office.city}-${i}`} className="nvo-line">
+                  {lines.map((line, lineIndex) => (
+                    <span
+                      key={`${office.code}-${lineIndex}`}
+                      className="nvo-line"
+                    >
                       {line}
                     </span>
                   ))}
@@ -219,11 +211,46 @@ function OfficeRow({ office, index }) {
   );
 }
 
-/* =========================================================
-   OFFICES
-========================================================= */
-
 export default function Offices() {
+  const [cmsOffices, setCmsOffices] = useState({});
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    getData("/bangladesh/offices", {}, { signal: controller.signal })
+      .then((response) => {
+        if (!controller.signal.aborted) {
+          setCmsOffices(response?.data ?? {});
+        }
+      })
+      .catch((error) => {
+        if (!controller.signal.aborted) {
+          console.error("Could not load corporate offices:", error);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  const displayOffices = offices.map((office) => {
+    const cmsOffice = cmsOffices[office.cmsKey];
+
+    if (!cmsOffice) return office;
+
+    return {
+      ...office,
+      address: cmsOffice.address
+        ? cmsOffice.address
+            .split(/\r?\n/)
+            .map((line) => line.trim())
+            .filter(Boolean)
+        : [],
+      phone: cmsOffice.phone || "",
+      website: cmsOffice.website || "",
+      locationUrl: cmsOffice.locationUrl || "",
+    };
+  });
+
   return (
     <section
       id="contact"
@@ -256,8 +283,12 @@ export default function Offices() {
         </div>
 
         <ul className="nvo-list">
-          {offices.map((office, index) => (
-            <OfficeRow key={office.city} office={office} index={index} />
+          {displayOffices.map((office, index) => (
+            <OfficeRow
+              key={office.code}
+              office={office}
+              index={index}
+            />
           ))}
         </ul>
       </div>

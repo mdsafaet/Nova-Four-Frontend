@@ -6,42 +6,70 @@ import NotFound from '../pages/NotFound';
 
 export default function CountryProvider({ country, children }) {
   const market = countries[country];
-  const isBangladesh = country === 'bangladesh';
+ const usesCmsProjects = ['bangladesh', 'dubai', 'usa'].includes(country);
 
-  const [projects, setProjects] = useState([]);
-  const [projectsLoading, setProjectsLoading] = useState(isBangladesh);
-  const [projectsError, setProjectsError] = useState(false);
+  const [projectState, setProjectState] = useState({
+    country: null,
+    projects: [],
+    loading: true,
+    error: false,
+  });
 
   useEffect(() => {
-    if (!isBangladesh) return;
+    if (!usesCmsProjects) return;
 
     const controller = new AbortController();
 
-    getData('/bangladesh/projects', {}, { signal: controller.signal })
+    setProjectState({
+      country,
+      projects: [],
+      loading: true,
+      error: false,
+    });
+
+    getData(`/${country}/projects`, {}, { signal: controller.signal })
       .then((response) => {
         if (controller.signal.aborted) return;
 
-        setProjects(Array.isArray(response?.data) ? response.data : []);
+        setProjectState({
+          country,
+          projects: Array.isArray(response?.data) ? response.data : [],
+          loading: false,
+          error: false,
+        });
       })
       .catch((error) => {
         if (controller.signal.aborted) return;
 
-        console.error('Could not load Bangladesh projects:', error);
-        setProjectsError(true);
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) {
-          setProjectsLoading(false);
-        }
+        console.error(`Could not load ${country} projects:`, error);
+
+        setProjectState({
+          country,
+          projects: [],
+          loading: false,
+          error: true,
+        });
       });
 
     return () => controller.abort();
-  }, [isBangladesh]);
+  }, [country, usesCmsProjects]);
 
   if (!market) return <NotFound />;
 
-  const value = isBangladesh
-    ? { ...market, projects, projectsLoading, projectsError }
+  const currentProjects =
+    projectState.country === country
+      ? projectState.projects
+      : [];
+
+  const value = usesCmsProjects
+    ? {
+        ...market,
+        projects: currentProjects,
+        projectsLoading:
+          projectState.country !== country || projectState.loading,
+        projectsError:
+          projectState.country === country && projectState.error,
+      }
     : market;
 
   return (

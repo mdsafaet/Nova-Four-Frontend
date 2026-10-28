@@ -4,29 +4,41 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { useCountry } from '../../context/country';
 import { getData } from '../../api/api';
 
+const cmsCountries = ['bangladesh', 'dubai', 'usa'];
 
 export default function Header() {
   const market = useCountry();
   const [open, setOpen] = useState(false);
-  const [header, setHeader] = useState(null);
+  const [headerState, setHeaderState] = useState({
+    country: null,
+    data: null,
+    loaded: false,
+  });
   const toggle = useRef(null);
 
   useEffect(() => {
-    setHeader(null);
-
-    if (market.id !== 'bangladesh') return;
+    if (!cmsCountries.includes(market.id)) return;
 
     const controller = new AbortController();
 
-    getData('/bangladesh/header', {}, { signal: controller.signal })
+    getData(`/${market.id}/header`, {}, { signal: controller.signal })
       .then((response) => {
         if (!controller.signal.aborted) {
-          setHeader(response?.data ?? null);
+          setHeaderState({
+            country: market.id,
+            data: response?.data ?? null,
+            loaded: true,
+          });
         }
       })
       .catch((error) => {
         if (!controller.signal.aborted) {
-          console.error('Could not load Bangladesh header:', error);
+          console.error(`Could not load ${market.id} header:`, error);
+          setHeaderState({
+            country: market.id,
+            data: null,
+            loaded: true,
+          });
         }
       });
 
@@ -45,34 +57,46 @@ export default function Header() {
       end
       key={to}
       onClick={() => setOpen(false)}
-      to={'/' + market.id + (to ? '/' + to : '')}
+      to={`/${market.id}${to ? `/${to}` : ''}`}
     >
       {label}
     </NavLink>
   ));
 
-  const fallbackLogo =
-    market.id === 'dubai'
-      ? '/images/nova-dubai-logo.svg'
-      : '/images/nova-logo.svg';
+  const usesCms = cmsCountries.includes(market.id);
+  const loading = usesCms &&
+    (!headerState.loaded || headerState.country !== market.id);
 
-  const logo = header?.logoUrl || fallbackLogo;
-  const ctaText = header?.ctaText?.trim() || 'Enquire';
+  const fallbackLogo = market.id === 'dubai'
+    ? '/images/nova-dubai-logo.svg'
+    : '/images/nova-logo.svg';
+
+  const logo = headerState.data?.logoUrl || fallbackLogo;
+  const ctaText = headerState.data?.ctaText?.trim() || 'Enquire';
 
   return (
     <header className="nvx-header">
       <div className="nvx-shell nvx-header-main">
         <Link
           className="nvx-brand"
-          to={'/' + market.id}
+          to={`/${market.id}`}
           aria-label="Nova Development home"
         >
-          <img
-            src={logo}
-            alt="Nova Development"
-            width="160"
-            height="60"
-          />
+          {loading ? (
+            <span
+              style={{ display: 'block', width: 160, height: 60 }}
+              aria-hidden="true"
+            />
+          ) : (
+            <img
+              src={logo}
+              alt="Nova Development"
+              width="160"
+              height="60"
+              loading="eager"
+              fetchPriority="high"
+            />
+          )}
         </Link>
 
         <nav className="nvx-desktop-nav" aria-label="Main navigation">
@@ -80,13 +104,15 @@ export default function Header() {
         </nav>
 
         <div className="nvx-header-actions">
-          <Link
-            className="nvx-button nvx-header-cta"
-            to={'/' + market.id + '/contact'}
-          >
-            {ctaText}
-            <ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
+          {!loading && (
+            <Link
+              className="nvx-button nvx-header-cta"
+              to={`/${market.id}/contact`}
+            >
+              {ctaText}
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </Link>
+          )}
 
           <button
             ref={toggle}
