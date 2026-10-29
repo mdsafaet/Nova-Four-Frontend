@@ -10,12 +10,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import '../../styles/country-hero.css';
 
-const cmsCountries = ['bangladesh', 'dubai', 'usa'];
+const cmsCountries = ['bangladesh', 'dubai', 'usa', 'uk'];
 
-function HeroMedia({ hero, reducedMotion, background = false }) {
+function HeroMedia({ hero, reducedMotion }) {
   const [videoFailed, setVideoFailed] = useState(false);
   const images = hero?.images || [];
   const video = !reducedMotion && !videoFailed ? hero?.video : null;
+
   const slides = [
     ...(video ? [{ type: 'video', src: video }] : []),
     ...images.map((src) => ({ type: 'image', src })),
@@ -23,9 +24,12 @@ function HeroMedia({ hero, reducedMotion, background = false }) {
 
   if (slides.length === 0) return null;
 
-  const content = slides.length === 1
-    ? slides.map((slide) => (
-        slide.type === 'video' ? (
+  if (slides.length === 1) {
+    const slide = slides[0];
+
+    return (
+      <div className="nvc-hero-background">
+        {slide.type === 'video' ? (
           <video
             key={slide.src}
             autoPlay
@@ -38,32 +42,32 @@ function HeroMedia({ hero, reducedMotion, background = false }) {
             <source src={slide.src} type="video/mp4" />
           </video>
         ) : (
-          <img
-            key={slide.src}
-            src={slide.src}
-            alt={background ? '' : hero?.heroAlt || ''}
-            fetchPriority="high"
-          />
-        )
-      ))
-    : (
+          <img src={slide.src} alt="" fetchPriority="high" />
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="nvc-hero-background">
       <Swiper
         modules={[A11y, Autoplay, Keyboard, Pagination]}
         slidesPerView={1}
         loop
         keyboard={{ enabled: true }}
         pagination={{ clickable: true }}
-        autoplay={reducedMotion ? false : {
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        autoplay={
+          reducedMotion
+            ? false
+            : { delay: 5000, disableOnInteraction: false }
+        }
         speed={reducedMotion ? 0 : 500}
         onSlideChange={(swiper) => {
-          swiper.slides.forEach((slide) => {
+          swiper.slides.forEach((slide, index) => {
             const element = slide.querySelector('video');
             if (!element) return;
 
-            if (slide === swiper.slides[swiper.activeIndex]) {
+            if (index === swiper.activeIndex) {
               element.play().catch(() => {});
             } else {
               element.pause();
@@ -76,8 +80,8 @@ function HeroMedia({ hero, reducedMotion, background = false }) {
             {slide.type === 'video' ? (
               <video
                 muted
-                playsInline
                 loop
+                playsInline
                 preload="metadata"
                 onError={() => setVideoFailed(true)}
               >
@@ -86,7 +90,7 @@ function HeroMedia({ hero, reducedMotion, background = false }) {
             ) : (
               <img
                 src={slide.src}
-                alt={background ? '' : hero?.heroAlt || ''}
+                alt=""
                 loading={index === 0 ? 'eager' : 'lazy'}
                 fetchPriority={index === 0 ? 'high' : undefined}
               />
@@ -94,19 +98,13 @@ function HeroMedia({ hero, reducedMotion, background = false }) {
           </SwiperSlide>
         ))}
       </Swiper>
-    );
-
-  return background ? (
-    <div className="nvc-hero-background">{content}</div>
-  ) : (
-    <figure className="nvc-image">{content}</figure>
+    </div>
   );
 }
 
 export default function HeroSection() {
   const market = useCountry();
   const reducedMotion = useReducedMotion();
-  const isBangladesh = market.id === 'bangladesh';
   const usesCms = cmsCountries.includes(market.id);
 
   const [heroState, setHeroState] = useState({
@@ -138,51 +136,25 @@ export default function HeroSection() {
     return () => controller.abort();
   }, [market.id, usesCms]);
 
-  const cmsHero = heroState.country === market.id
-    ? heroState.data
-    : null;
+  const cmsHero =
+    heroState.country === market.id ? heroState.data : null;
 
   return (
-    <>
-      <section
-        className={`nvc-hero${isBangladesh ? ' nvc-hero--video' : ''}`}
-        aria-label={`${market.name} homepage hero`}
-      >
-        {isBangladesh && cmsHero && (
-          <HeroMedia
-            key={`${market.id}-${cmsHero.video || cmsHero.images?.[0]}`}
-            hero={cmsHero}
-            reducedMotion={reducedMotion}
-            background
-          />
-        )}
+    <section
+      className="nvc-hero nvc-hero--video"
+      aria-label={`${market.name} homepage hero`}
+    >
+      {cmsHero && (
+        <HeroMedia
+          key={`${market.id}-${cmsHero.video || cmsHero.images?.[0]}`}
+          hero={cmsHero}
+          reducedMotion={reducedMotion}
+        />
+      )}
 
-        <div className="nvc-hero-inner nvx-shell">
-          {!isBangladesh && (
-            usesCms ? (
-              cmsHero && (
-                <HeroMedia
-                  key={`${market.id}-${cmsHero.video || cmsHero.images?.[0]}`}
-                  hero={cmsHero}
-                  reducedMotion={reducedMotion}
-                />
-              )
-            ) : (
-              <figure className="nvc-image">
-                <img
-                  src={market.home.heroImage}
-                  alt={market.home.heroAlt}
-                  fetchPriority="high"
-                />
-              </figure>
-            )
-          )}
-        </div>
+      <div className="nvc-hero-inner nvx-shell" />
 
-        {isBangladesh && <MarketStrip />}
-      </section>
-
-      {!isBangladesh && <MarketStrip />}
-    </>
+      <MarketStrip />
+    </section>
   );
 }

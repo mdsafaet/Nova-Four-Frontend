@@ -4,7 +4,7 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { useCountry } from '../../context/country';
 import { getData } from '../../api/api';
 
-const cmsCountries = ['bangladesh', 'dubai', 'usa'];
+const cmsCountries = ['bangladesh', 'dubai', 'usa','uk'];
 
 export default function Header() {
   const market = useCountry();

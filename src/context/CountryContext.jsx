@@ -6,7 +6,7 @@ import NotFound from '../pages/NotFound';
 
 export default function CountryProvider({ country, children }) {
   const market = countries[country];
- const usesCmsProjects = ['bangladesh', 'dubai', 'usa'].includes(country);
+ const usesCmsProjects = ['bangladesh', 'dubai', 'usa', 'uk'].includes(country);
 
   const [projectState, setProjectState] = useState({
     country: null,

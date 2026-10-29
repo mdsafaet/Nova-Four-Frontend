@@ -4,10 +4,10 @@ import { ReactCountryFlag } from 'react-country-flag';
 import { Reveal } from '../company-profile/Float';
 
 const markets = [
-  { code: 'AE', path: '', name: 'UAE', city: 'Dubai', status: 'Operating' },
+  { code: 'AE', path: '/dubai', name: 'UAE', city: 'Dubai', status: 'Operating' },
   { code: 'BD', path: '/bangladesh', name: 'Bangladesh', city: 'Dhaka', status: 'Operating' },
-  { code: 'US', path: '', name: 'USA', city: 'New York', status: 'Expanding' },
-  { code: 'GB', path: '', name: 'UK', city: 'London', status: 'Operating' },
+  { code: 'US', path: '/usa', name: 'USA', city: 'New York', status: 'Expanding' },
+  { code: 'GB', path: '/uk', name: 'UK', city: 'London', status: 'Operating' },
 ];
 
 export default function MarketStrip() {
